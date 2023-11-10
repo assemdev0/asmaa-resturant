@@ -148,33 +148,37 @@ class ProductWidget extends StatelessWidget {
                     vertical: desktop ? 0 : Dimensions.paddingSizeExtraSmall),
                 child: Row(children: [
                   ((image != null && image.isNotEmpty) || isRestaurant)
-                      ? Stack(children: [
-                          ClipRRect(
-                            borderRadius:
-                                BorderRadius.circular(Dimensions.radiusDefault),
-                            child: CustomImage(
-                              image:
-                                  '${isCampaign ? baseUrls!.campaignImageUrl : isRestaurant ? baseUrls!.restaurantImageUrl : baseUrls!.productImageUrl}'
-                                  '/${isRestaurant ? restaurant!.logo : product!.image}',
-                              height: desktop
-                                  ? 250
-                                  : length == null
-                                      ? 230
-                                      : 205,
-                              width: desktop ? 200 : 160,
-                              fit: BoxFit.fitWidth,
+                      ? Expanded(
+                          child: Stack(children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                  Dimensions.radiusDefault),
+                              child: CustomImage(
+                                image:
+                                    '${isCampaign ? baseUrls!.campaignImageUrl : isRestaurant ? baseUrls!.restaurantImageUrl : baseUrls!.productImageUrl}'
+                                    '/${isRestaurant ? restaurant!.logo : product!.image}',
+                                // height: desktop
+                                //     ? 250
+                                //     : length == null
+                                //         ? 230
+                                //         : 205,
+                                // width: desktop ? 200 : 160,
+                                fit: BoxFit.fitWidth,
+                              ),
                             ),
-                          ),
-                          DiscountTag(
-                            discount: discount,
-                            discountType: discountType,
-                            freeDelivery:
-                                isRestaurant ? restaurant!.freeDelivery : false,
-                          ),
-                          isAvailable
-                              ? const SizedBox()
-                              : NotAvailableWidget(isRestaurant: isRestaurant),
-                        ])
+                            DiscountTag(
+                              discount: discount,
+                              discountType: discountType,
+                              freeDelivery: isRestaurant
+                                  ? restaurant!.freeDelivery
+                                  : false,
+                            ),
+                            isAvailable
+                                ? const SizedBox()
+                                : NotAvailableWidget(
+                                    isRestaurant: isRestaurant),
+                          ]),
+                        )
                       : const SizedBox.shrink(),
                   const SizedBox(width: Dimensions.paddingSizeSmall),
                   Expanded(
