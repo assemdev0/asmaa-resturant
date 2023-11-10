@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:animated_flip_counter/animated_flip_counter.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import '/controller/auth_controller.dart';
 import '/controller/cart_controller.dart';
 import '/controller/product_controller.dart';
@@ -48,7 +51,7 @@ class _ProductBottomSheetState extends State<ProductBottomSheet> {
   @override
   void initState() {
     super.initState();
-
+    log('Product: ${widget.product!.images}');
     Get.find<ProductController>().initData(widget.product, widget.cart);
   }
 
@@ -119,6 +122,7 @@ class _ProductBottomSheetState extends State<ProductBottomSheet> {
         bool isAvailable = DateConverter.isAvailable(
             widget.product!.availableTimeStarts,
             widget.product!.availableTimeEnds);
+        // log('Products: ${widget.product!.images!}');
 
         return ConstrainedBox(
           constraints: BoxConstraints(
@@ -151,11 +155,97 @@ class _ProductBottomSheetState extends State<ProductBottomSheet> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     ///Product
+
+                                    /// Image Slider
+                                    (widget.product!.image != null)
+                                        // images!.imagesUrl!
+                                        //         .isNotEmpty)
+                                        ? InkWell(
+                                            onTap: widget.isCampaign
+                                                ? null
+                                                : () {
+                                                    if (!widget.isCampaign) {
+                                                      Get.toNamed(RouteHelper
+                                                          .getItemImagesRoute(
+                                                              widget.product!));
+                                                    }
+                                                  },
+                                            child: Stack(children: [
+                                              CarouselSlider(
+                                                items: [
+                                                  widget.product!.image
+                                                  // images!.imagesUrl!
+                                                ]
+                                                    .map(
+                                                      (e) => InkWell(
+                                                        onTap: () {
+                                                          log(e!);
+                                                        },
+                                                        child: ClipRRect(
+                                                          borderRadius: BorderRadius
+                                                              .circular(Dimensions
+                                                                  .radiusSmall),
+                                                          child: CustomImage(
+                                                            // image: e.url!,
+                                                            image:
+                                                                '${widget.isCampaign ? Get.find<SplashController>().configModel!.baseUrls!.campaignImageUrl : Get.find<SplashController>().configModel!.baseUrls!.productImageUrl}/$e',
+                                                            // '${widget.product!.image}',
+                                                            width:
+                                                                double.infinity,
+                                                            // ResponsiveHelper
+                                                            //         .isMobile(context)
+                                                            //     ? 100
+                                                            //     : 140,
+                                                            height: ResponsiveHelper
+                                                                    .isMobile(
+                                                                        context)
+                                                                ? 220
+                                                                : 300,
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
+                                                    .toList(),
+                                                options: CarouselOptions(
+                                                  height:
+                                                      ResponsiveHelper.isMobile(
+                                                              context)
+                                                          ? 220
+                                                          : 300,
+                                                  viewportFraction: 1.0,
+                                                  autoPlay: true,
+                                                  autoPlayInterval:
+                                                      const Duration(
+                                                          seconds: 3),
+                                                  autoPlayAnimationDuration:
+                                                      const Duration(
+                                                          milliseconds: 800),
+                                                  autoPlayCurve:
+                                                      Curves.fastOutSlowIn,
+                                                  pauseAutoPlayOnTouch: true,
+                                                  aspectRatio: 1.0,
+                                                  initialPage: 0,
+                                                  enlargeCenterPage: true,
+                                                  onPageChanged:
+                                                      (index, reason) {},
+                                                ),
+                                              ),
+                                              DiscountTag(
+                                                  discount: discount,
+                                                  discountType: discountType,
+                                                  fromTop: 20),
+                                            ]),
+                                          )
+                                        : const SizedBox.shrink(),
+                                    const SizedBox(
+                                      height: Dimensions.paddingSizeDefault,
+                                    ),
                                     Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          (widget.product!.image != null &&
+                                          /*(widget.product!.image != null &&
                                                   widget.product!.image!
                                                       .isNotEmpty)
                                               ? InkWell(
@@ -199,7 +289,7 @@ class _ProductBottomSheetState extends State<ProductBottomSheet> {
                                                         fromTop: 20),
                                                   ]),
                                                 )
-                                              : const SizedBox.shrink(),
+                                              : const SizedBox.shrink(),*/
                                           const SizedBox(
                                               width:
                                                   Dimensions.paddingSizeSmall),

@@ -1,24 +1,26 @@
+import 'dart:developer';
+
 class ProductModel {
   int? totalSize;
   String? limit;
   int? offset;
   List<Product>? products;
 
-  ProductModel( {
-    this.totalSize ,
-    this.limit ,
-    this.offset ,
-    this.products
-  });
+  ProductModel({this.totalSize, this.limit, this.offset, this.products});
 
   ProductModel.fromJson(Map<String, dynamic> json) {
     totalSize = json['total_size'];
     limit = json['limit'].toString();
-    offset = (json['offset'] != null && json['offset'].toString().trim().isNotEmpty) ? int.parse(json['offset'].toString()) : null;
+    offset =
+        (json['offset'] != null && json['offset'].toString().trim().isNotEmpty)
+            ? int.parse(json['offset'].toString())
+            : null;
     if (json['products'] != null) {
       products = [];
       json['products'].forEach((v) {
-        if(v['variations'] == null || v['variations'].isEmpty || v['variations'][0]['values'] != null) {
+        if (v['variations'] == null ||
+            v['variations'].isEmpty ||
+            v['variations'][0]['values'] != null) {
           products!.add(Product.fromJson(v));
         }
       });
@@ -42,6 +44,7 @@ class Product {
   String? name;
   String? description;
   String? image;
+  ImagesUrlModel? images;
   int? categoryId;
   List<CategoryIds>? categoryIds;
   List<Variation>? variations;
@@ -63,32 +66,33 @@ class Product {
   int? veg;
   int? quantityLimit;
 
-  Product(
-      {this.id,
-        this.name,
-        this.description,
-        this.image,
-        this.categoryId,
-        this.categoryIds,
-        this.variations,
-        this.addOns,
-        this.choiceOptions,
-        this.price,
-        this.tax,
-        this.discount,
-        this.discountType,
-        this.availableTimeStarts,
-        this.availableTimeEnds,
-        this.restaurantId,
-        this.restaurantName,
-        this.restaurantDiscount,
-        this.restaurantStatus,
-        this.scheduleOrder,
-        this.avgRating,
-        this.ratingCount,
-        this.veg,
-        this.quantityLimit,
-      });
+  Product({
+    this.id,
+    this.name,
+    this.description,
+    this.image,
+    this.categoryId,
+    this.categoryIds,
+    this.variations,
+    this.addOns,
+    this.choiceOptions,
+    this.price,
+    this.tax,
+    this.discount,
+    this.discountType,
+    this.availableTimeStarts,
+    this.availableTimeEnds,
+    this.restaurantId,
+    this.restaurantName,
+    this.restaurantDiscount,
+    this.restaurantStatus,
+    this.scheduleOrder,
+    this.avgRating,
+    this.ratingCount,
+    this.veg,
+    this.quantityLimit,
+    this.images,
+  });
 
   Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -104,7 +108,7 @@ class Product {
     }
     if (json['variations'] != null && json['variations'].isNotEmpty) {
       variations = [];
-      if(json['variations'][0]['values'] != null) {
+      if (json['variations'][0]['values'] != null) {
         json['variations'].forEach((v) {
           variations!.add(Variation.fromJson(v));
         });
@@ -116,7 +120,7 @@ class Product {
         addOns!.add(AddOns.fromJson(v));
       });
     }
-    if (json['choice_options'] != null && json['choice_options'] is !String) {
+    if (json['choice_options'] != null && json['choice_options'] is! String) {
       choiceOptions = [];
       json['choice_options'].forEach((v) {
         choiceOptions!.add(ChoiceOptions.fromJson(v));
@@ -137,6 +141,10 @@ class Product {
     ratingCount = json['rating_count'];
     veg = json['veg'] != null ? int.parse(json['veg'].toString()) : 0;
     quantityLimit = json['maximum_cart_quantity'];
+    // log('Images Urls: ${json['images_url']}');
+    if (json['images_url'] != null) {
+      images = ImagesUrlModel.fromJson(json['images_url']);
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -156,8 +164,7 @@ class Product {
       data['add_ons'] = addOns!.map((v) => v.toJson()).toList();
     }
     if (choiceOptions != null) {
-      data['choice_options'] =
-          choiceOptions!.map((v) => v.toJson()).toList();
+      data['choice_options'] = choiceOptions!.map((v) => v.toJson()).toList();
     }
     data['price'] = price;
     data['tax'] = tax;
@@ -175,6 +182,31 @@ class Product {
     data['veg'] = veg;
     data['maximum_cart_quantity'] = quantityLimit;
     return data;
+  }
+}
+
+class ImagesUrlModel {
+  List<ImagesUrl>? imagesUrl;
+
+  ImagesUrlModel({this.imagesUrl});
+
+  ImagesUrlModel.fromJson(Map<String, dynamic> json) {
+    if (json['images_url'] != null) {
+      imagesUrl = <ImagesUrl>[];
+      json['images_url'].forEach((v) {
+        imagesUrl!.add(new ImagesUrl.fromJson(v));
+      });
+    }
+  }
+}
+
+class ImagesUrl {
+  String? url;
+
+  ImagesUrl({this.url});
+
+  ImagesUrl.fromJson(Map<String, dynamic> json) {
+    url = json['url'];
   }
 }
 
@@ -202,13 +234,19 @@ class Variation {
   bool? required;
   List<VariationValue>? variationValues;
 
-  Variation({this.name, this.multiSelect, this.min, this.max, this.required, this.variationValues});
+  Variation(
+      {this.name,
+      this.multiSelect,
+      this.min,
+      this.max,
+      this.required,
+      this.variationValues});
 
   Variation.fromJson(Map<String, dynamic> json) {
-    if(json['max'] != null) {
+    if (json['max'] != null) {
       name = json['name'];
       multiSelect = json['type'] == 'multi';
-      min =  multiSelect! ? int.parse(json['min'].toString()) : 0;
+      min = multiSelect! ? int.parse(json['min'].toString()) : 0;
       max = multiSelect! ? int.parse(json['max'].toString()) : 0;
       required = json['required'] == 'on';
       if (json['values'] != null) {
@@ -258,10 +296,7 @@ class AddOns {
   String? name;
   double? price;
 
-  AddOns(
-      {this.id,
-        this.name,
-        this.price});
+  AddOns({this.id, this.name, this.price});
 
   AddOns.fromJson(Map<String, dynamic> json) {
     id = json['id'];

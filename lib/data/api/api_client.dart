@@ -56,15 +56,19 @@ class ApiClient extends GetxService {
     return header;
   }
 
-  Future<Response> getData(String uri,
-      {Map<String, dynamic>? query, Map<String, String>? headers}) async {
+  Future<Response> getData(
+    String uri, {
+    Map<String, dynamic>? query,
+    Map<String, String>? headers,
+    String base = AppConstants.baseUrl,
+  }) async {
     try {
       if (kDebugMode) {
         debugPrint('====> API Call: $uri\nHeader: $_mainHeaders');
       }
       http.Response response = await http
           .get(
-            Uri.parse(appBaseUrl + uri),
+            Uri.parse(base + uri),
             headers: headers ?? _mainHeaders,
           )
           .timeout(Duration(seconds: timeoutInSeconds));

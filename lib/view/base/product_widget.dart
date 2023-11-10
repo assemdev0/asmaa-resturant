@@ -136,442 +136,459 @@ class ProductWidget extends StatelessWidget {
                   offset: Offset(2, 5))
             ],
           ),
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Expanded(
-                child: Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: desktop ? 0 : Dimensions.paddingSizeExtraSmall),
-              child: Row(children: [
-                ((image != null && image.isNotEmpty) || isRestaurant)
-                    ? Stack(children: [
-                        ClipRRect(
-                          borderRadius:
-                              BorderRadius.circular(Dimensions.radiusDefault),
-                          child: CustomImage(
-                            image:
-                                '${isCampaign ? baseUrls!.campaignImageUrl : isRestaurant ? baseUrls!.restaurantImageUrl : baseUrls!.productImageUrl}'
-                                '/${isRestaurant ? restaurant!.logo : product!.image}',
-                            height: desktop
-                                ? 120
-                                : length == null
-                                    ? 100
-                                    : 75,
-                            width: desktop ? 120 : 80,
-                            fit: BoxFit.cover,
+          // width: desktop ? 200 : double.maxFinite,
+          // height: desktop ? 250 : 500,
+          // MediaQuery.of(context).size.height * 0.35,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                  child: Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: desktop ? 0 : Dimensions.paddingSizeExtraSmall),
+                child: Row(children: [
+                  ((image != null && image.isNotEmpty) || isRestaurant)
+                      ? Stack(children: [
+                          ClipRRect(
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.radiusDefault),
+                            child: CustomImage(
+                              image:
+                                  '${isCampaign ? baseUrls!.campaignImageUrl : isRestaurant ? baseUrls!.restaurantImageUrl : baseUrls!.productImageUrl}'
+                                  '/${isRestaurant ? restaurant!.logo : product!.image}',
+                              height: desktop
+                                  ? 250
+                                  : length == null
+                                      ? 230
+                                      : 205,
+                              width: desktop ? 200 : 160,
+                              fit: BoxFit.fitHeight,
+                            ),
                           ),
-                        ),
-                        DiscountTag(
-                          discount: discount,
-                          discountType: discountType,
-                          freeDelivery:
-                              isRestaurant ? restaurant!.freeDelivery : false,
-                        ),
-                        isAvailable
-                            ? const SizedBox()
-                            : NotAvailableWidget(isRestaurant: isRestaurant),
-                      ])
-                    : const SizedBox.shrink(),
-                const SizedBox(width: Dimensions.paddingSizeSmall),
-                Expanded(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Wrap(
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            children: [
-                              Text(
-                                isRestaurant
-                                    ? restaurant!.name!
-                                    : product!.name!,
-                                style: robotoMedium.copyWith(
-                                    fontSize: Dimensions.fontSizeSmall),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              const SizedBox(
-                                  width: Dimensions.paddingSizeExtraSmall),
-                              (!isRestaurant &&
-                                      Get.find<SplashController>()
-                                          .configModel!
-                                          .toggleVegNonVeg!)
-                                  ? Image.asset(
-                                      product != null && product!.veg == 0
-                                          ? Images.nonVegImage
-                                          : Images.vegImage,
-                                      height: 10,
-                                      width: 10,
-                                      fit: BoxFit.contain)
-                                  : const SizedBox(),
-                            ]),
-
-                        SizedBox(
-                            height: isRestaurant
-                                ? 0
-                                : Dimensions.paddingSizeExtraSmall),
-
-                        Text(
-                          isRestaurant ? '' : product!.restaurantName ?? '',
-                          style: robotoRegular.copyWith(
-                            fontSize: Dimensions.fontSizeExtraSmall,
-                            color: Theme.of(context).disabledColor,
+                          DiscountTag(
+                            discount: discount,
+                            discountType: discountType,
+                            freeDelivery:
+                                isRestaurant ? restaurant!.freeDelivery : false,
                           ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-
-                        isRestaurant
-                            ? Row(children: [
-                                Icon(Icons.star,
-                                    size: 16,
-                                    color: Theme.of(context).primaryColor),
-                                const SizedBox(
-                                    width: Dimensions.paddingSizeExtraSmall),
+                          isAvailable
+                              ? const SizedBox()
+                              : NotAvailableWidget(isRestaurant: isRestaurant),
+                        ])
+                      : const SizedBox.shrink(),
+                  const SizedBox(width: Dimensions.paddingSizeSmall),
+                  Expanded(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: [
                                 Text(
-                                    isRestaurant
-                                        ? restaurant!.avgRating!
-                                            .toStringAsFixed(1)
-                                        : product!.avgRating!
-                                            .toStringAsFixed(1),
-                                    style: robotoMedium),
+                                  isRestaurant
+                                      ? restaurant!.name!
+                                      : product!.name!,
+                                  style: robotoMedium.copyWith(
+                                      fontSize: Dimensions.fontSizeSmall),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                                 const SizedBox(
                                     width: Dimensions.paddingSizeExtraSmall),
-                                Text(
-                                    '(${isRestaurant ? restaurant!.ratingCount : product!.ratingCount})',
-                                    style: robotoRegular.copyWith(
-                                        fontSize: Dimensions.fontSizeSmall,
-                                        color:
-                                            Theme.of(context).disabledColor)),
-                              ])
-                            : const SizedBox(),
+                                (!isRestaurant &&
+                                        Get.find<SplashController>()
+                                            .configModel!
+                                            .toggleVegNonVeg!)
+                                    ? Image.asset(
+                                        product != null && product!.veg == 0
+                                            ? Images.nonVegImage
+                                            : Images.vegImage,
+                                        height: 10,
+                                        width: 10,
+                                        fit: BoxFit.contain)
+                                    : const SizedBox(),
+                              ]),
 
-                        const SizedBox(
-                            height: Dimensions.paddingSizeExtraSmall),
-                        // SizedBox(height: (desktop || isRestaurant) ? 5 : 0),
+                          SizedBox(
+                              height: isRestaurant
+                                  ? 0
+                                  : Dimensions.paddingSizeExtraSmall),
 
-                        // !isRestaurant ? RatingBar(
-                        //   rating: isRestaurant ? restaurant!.avgRating : product!.avgRating, size: desktop ? 15 : 12,
-                        //   ratingCount: isRestaurant ? restaurant!.ratingCount : product!.ratingCount,
-                        // ) : const SizedBox(),
-                        !isRestaurant
-                            ? Row(children: [
-                                Icon(Icons.star,
-                                    size: 16,
-                                    color: Theme.of(context).primaryColor),
-                                const SizedBox(
-                                    width: Dimensions.paddingSizeExtraSmall),
-                                Text(product!.avgRating!.toStringAsFixed(1),
-                                    style: robotoMedium),
-                                const SizedBox(
-                                    width: Dimensions.paddingSizeExtraSmall),
-                                Text('(${product!.ratingCount})',
-                                    style: robotoRegular.copyWith(
-                                        fontSize: Dimensions.fontSizeSmall,
-                                        color:
-                                            Theme.of(context).disabledColor)),
-                              ])
-                            : const SizedBox(),
+                          Text(
+                            isRestaurant ? '' : product!.restaurantName ?? '',
+                            style: robotoRegular.copyWith(
+                              fontSize: Dimensions.fontSizeExtraSmall,
+                              color: Theme.of(context).disabledColor,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
 
-                        SizedBox(
-                            height: (!isRestaurant && desktop)
-                                ? Dimensions.paddingSizeExtraSmall
-                                : 0),
-
-                        isRestaurant
-                            ? Row(
-                                children: [
-                                  Text(
-                                    'start_from'.tr,
-                                    style: robotoRegular.copyWith(
-                                        fontSize: Dimensions.fontSizeExtraSmall,
-                                        color: Theme.of(context).disabledColor),
-                                  ),
+                          isRestaurant
+                              ? Row(children: [
+                                  Icon(Icons.star,
+                                      size: 16,
+                                      color: Theme.of(context).primaryColor),
                                   const SizedBox(
                                       width: Dimensions.paddingSizeExtraSmall),
                                   Text(
-                                    PriceConverter.convertPrice(
-                                        restaurant!.minimumOrder!),
-                                    style: robotoRegular.copyWith(
-                                        fontSize: Dimensions.fontSizeSmall,
-                                        fontWeight: FontWeight.w700,
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge!
-                                            .color),
-                                  ),
-                                ],
-                              )
-                            : Row(children: [
-                                discount! > 0
-                                    ? Text(
-                                        PriceConverter.convertPrice(
-                                            product!.price),
-                                        textDirection: TextDirection.ltr,
-                                        style: robotoMedium.copyWith(
+                                      isRestaurant
+                                          ? restaurant!.avgRating!
+                                              .toStringAsFixed(1)
+                                          : product!.avgRating!
+                                              .toStringAsFixed(1),
+                                      style: robotoMedium),
+                                  const SizedBox(
+                                      width: Dimensions.paddingSizeExtraSmall),
+                                  Text(
+                                      '(${isRestaurant ? restaurant!.ratingCount : product!.ratingCount})',
+                                      style: robotoRegular.copyWith(
+                                          fontSize: Dimensions.fontSizeSmall,
+                                          color:
+                                              Theme.of(context).disabledColor)),
+                                ])
+                              : const SizedBox(),
+
+                          const SizedBox(
+                              height: Dimensions.paddingSizeExtraSmall),
+                          // SizedBox(height: (desktop || isRestaurant) ? 5 : 0),
+
+                          // !isRestaurant ? RatingBar(
+                          //   rating: isRestaurant ? restaurant!.avgRating : product!.avgRating, size: desktop ? 15 : 12,
+                          //   ratingCount: isRestaurant ? restaurant!.ratingCount : product!.ratingCount,
+                          // ) : const SizedBox(),
+                          !isRestaurant
+                              ? Row(children: [
+                                  Icon(Icons.star,
+                                      size: 16,
+                                      color: Theme.of(context).primaryColor),
+                                  const SizedBox(
+                                      width: Dimensions.paddingSizeExtraSmall),
+                                  Text(product!.avgRating!.toStringAsFixed(1),
+                                      style: robotoMedium),
+                                  const SizedBox(
+                                      width: Dimensions.paddingSizeExtraSmall),
+                                  Text('(${product!.ratingCount})',
+                                      style: robotoRegular.copyWith(
+                                          fontSize: Dimensions.fontSizeSmall,
+                                          color:
+                                              Theme.of(context).disabledColor)),
+                                ])
+                              : const SizedBox(),
+
+                          SizedBox(
+                              height: (!isRestaurant && desktop)
+                                  ? Dimensions.paddingSizeExtraSmall
+                                  : 0),
+
+                          isRestaurant
+                              ? Row(
+                                  children: [
+                                    Text(
+                                      'start_from'.tr,
+                                      style: robotoRegular.copyWith(
                                           fontSize:
                                               Dimensions.fontSizeExtraSmall,
                                           color:
-                                              Theme.of(context).disabledColor,
-                                          decoration:
-                                              TextDecoration.lineThrough,
-                                        ),
-                                      )
-                                    : const SizedBox(),
-                                SizedBox(
-                                    width: discount > 0
-                                        ? Dimensions.paddingSizeExtraSmall
-                                        : 0),
-                                Text(
-                                  PriceConverter.convertPrice(product!.price,
-                                      discount: discount,
-                                      discountType: discountType),
-                                  style: robotoMedium.copyWith(
-                                      fontSize: Dimensions.fontSizeSmall,
-                                      color: Theme.of(context).primaryColor),
-                                  textDirection: TextDirection.ltr,
-                                ),
-                                const SizedBox(
-                                    width: Dimensions.paddingSizeExtraSmall),
-                                (image != null && image.isNotEmpty)
-                                    ? const SizedBox.shrink()
-                                    : DiscountTagWithoutImage(
-                                        discount: discount,
-                                        discountType: discountType,
-                                        freeDelivery: isRestaurant
-                                            ? restaurant!.freeDelivery
-                                            : false),
-                              ]),
-                      ]),
-                ),
-                Column(
-                    mainAxisAlignment: isRestaurant
-                        ? MainAxisAlignment.center
-                        : MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      fromCartSuggestion
-                          ? const SizedBox()
-                          : GetBuilder<WishListController>(
-                              builder: (wishController) {
-                              bool isWished = isRestaurant
-                                  ? wishController.wishRestIdList
-                                      .contains(restaurant!.id)
-                                  : wishController.wishProductIdList
-                                      .contains(product!.id);
-                              return InkWell(
-                                onTap: () {
-                                  if (Get.find<AuthController>().isLoggedIn()) {
-                                    isWished
-                                        ? wishController.removeFromWishList(
-                                            isRestaurant
-                                                ? restaurant!.id
-                                                : product!.id,
-                                            isRestaurant)
-                                        : wishController.addToWishList(
-                                            product, restaurant, isRestaurant);
-                                  } else {
-                                    showCustomSnackBar(
-                                        'you_are_not_logged_in'.tr);
-                                  }
-                                },
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: desktop
-                                          ? Dimensions.paddingSizeSmall
-                                          : 0),
-                                  child: Icon(
-                                    Icons.favorite,
-                                    size: desktop ? 30 : 25,
-                                    color: isWished
-                                        ? Theme.of(context).primaryColor
-                                        : Theme.of(context)
-                                            .primaryColor
-                                            .withOpacity(0.2),
-                                  ),
-                                ),
-                              );
-                            }),
-                      !isRestaurant
-                          ? GetBuilder<CartController>(
-                              builder: (cartController) {
-                              int cartQty =
-                                  cartController.cartQuantity(product!.id!);
-                              int cartIndex = cartController.isExistInCart(
-                                  product!.id, null);
-                              CartModel cartModel = CartModel(
-                                price,
-                                discountPrice,
-                                (price - discountPrice),
-                                1,
-                                [],
-                                [],
-                                false,
-                                product,
-                                [],
-                              );
-                              return cartQty != 0
-                                  ? Container(
-                                      decoration: BoxDecoration(
-                                        color: Theme.of(context).primaryColor,
-                                        borderRadius: BorderRadius.circular(
-                                            Dimensions.radiusExtraLarge),
-                                      ),
-                                      child: Row(children: [
-                                        InkWell(
-                                          onTap: () {
-                                            if (cartController
-                                                    .cartList[cartIndex]
-                                                    .quantity! >
-                                                1) {
-                                              cartController.setQuantity(
-                                                  false, cartModel,
-                                                  cartIndex: cartIndex);
-                                            } else {
-                                              cartController
-                                                  .removeFromCart(cartIndex);
-                                            }
-                                          },
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  Theme.of(context).cardColor,
-                                              shape: BoxShape.circle,
-                                              border: Border.all(
-                                                  color: Theme.of(context)
-                                                      .primaryColor),
-                                            ),
-                                            padding: const EdgeInsets.all(
-                                                Dimensions
-                                                    .paddingSizeExtraSmall),
-                                            child: Icon(
-                                              Icons.remove,
-                                              size: 16,
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal:
-                                                  Dimensions.paddingSizeSmall),
-                                          child: Text(
-                                            cartQty.toString(),
-                                            style: robotoMedium.copyWith(
-                                                fontSize:
-                                                    Dimensions.fontSizeSmall,
-                                                color: Theme.of(context)
-                                                    .cardColor),
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            cartController.setQuantity(
-                                                true, cartModel,
-                                                cartIndex: cartIndex);
-                                          },
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  Theme.of(context).cardColor,
-                                              shape: BoxShape.circle,
-                                              border: Border.all(
-                                                  color: Theme.of(context)
-                                                      .primaryColor),
-                                            ),
-                                            padding: const EdgeInsets.all(
-                                                Dimensions
-                                                    .paddingSizeExtraSmall),
-                                            child: Icon(
-                                              Icons.add,
-                                              size: 16,
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                            ),
-                                          ),
-                                        ),
-                                      ]),
-                                    )
-                                  : InkWell(
-                                      onTap: () {
-                                        if (product!.variations == null ||
-                                            (product!.variations != null &&
-                                                product!.variations!.isEmpty)) {
-                                          Get.find<ProductController>()
-                                              .setExistInCart(product!);
-
-                                          if (Get.find<CartController>()
-                                              .existAnotherRestaurantProduct(
-                                                  cartModel
-                                                      .product!.restaurantId)) {
-                                            Get.dialog(
-                                                ConfirmationDialog(
-                                                  icon: Images.warning,
-                                                  title: 'are_you_sure_to_reset'
-                                                      .tr,
-                                                  description:
-                                                      'if_you_continue'.tr,
-                                                  onYesPressed: () {
-                                                    Get.back();
-                                                    Get.find<CartController>()
-                                                        .removeAllAndAddToCart(
-                                                            cartModel);
-                                                    _showCartSnackBar();
-                                                  },
-                                                ),
-                                                barrierDismissible: false);
-                                          } else {
-                                            Get.find<CartController>()
-                                                .addToCart(
-                                                    cartModel,
-                                                    Get.find<
-                                                            ProductController>()
-                                                        .cartIndex);
-                                            _showCartSnackBar();
-                                          }
-                                        } else {
-                                          ResponsiveHelper.isMobile(context)
-                                              ? Get.bottomSheet(
-                                                  ProductBottomSheet(
-                                                      product: product,
-                                                      isCampaign: false),
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  isScrollControlled: true,
-                                                )
-                                              : Get.dialog(
-                                                  Dialog(
-                                                      child: ProductBottomSheet(
-                                                          product: product,
-                                                          isCampaign: false)),
-                                                );
-                                        }
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: Theme.of(context).cardColor,
-                                          shape: BoxShape.circle,
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Colors.black
-                                                    .withOpacity(0.1),
-                                                spreadRadius: 1,
-                                                blurRadius: 10,
-                                                offset: const Offset(2, 5))
-                                          ],
-                                        ),
-                                        child: Icon(Icons.add,
-                                            size: desktop ? 30 : 25,
+                                              Theme.of(context).disabledColor),
+                                    ),
+                                    const SizedBox(
+                                        width:
+                                            Dimensions.paddingSizeExtraSmall),
+                                    Text(
+                                      PriceConverter.convertPrice(
+                                          restaurant!.minimumOrder!),
+                                      style: robotoRegular.copyWith(
+                                          fontSize: Dimensions.fontSizeSmall,
+                                          fontWeight: FontWeight.w700,
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge!
+                                              .color),
+                                    ),
+                                  ],
+                                )
+                              : Row(children: [
+                                  discount! > 0
+                                      ? Text(
+                                          PriceConverter.convertPrice(
+                                              product!.price),
+                                          textDirection: TextDirection.ltr,
+                                          style: robotoMedium.copyWith(
+                                            fontSize:
+                                                Dimensions.fontSizeExtraSmall,
                                             color:
-                                                Theme.of(context).primaryColor),
-                                      ),
-                                    );
-                            })
-                          : const SizedBox(),
-                    ]),
-              ]),
-            )),
-          ]),
+                                                Theme.of(context).disabledColor,
+                                            decoration:
+                                                TextDecoration.lineThrough,
+                                          ),
+                                        )
+                                      : const SizedBox(),
+                                  SizedBox(
+                                      width: discount > 0
+                                          ? Dimensions.paddingSizeExtraSmall
+                                          : 0),
+                                  Text(
+                                    PriceConverter.convertPrice(product!.price,
+                                        discount: discount,
+                                        discountType: discountType),
+                                    style: robotoMedium.copyWith(
+                                        fontSize: Dimensions.fontSizeSmall,
+                                        color: Theme.of(context).primaryColor),
+                                    textDirection: TextDirection.ltr,
+                                  ),
+                                  const SizedBox(
+                                      width: Dimensions.paddingSizeExtraSmall),
+                                  (image != null && image.isNotEmpty)
+                                      ? const SizedBox.shrink()
+                                      : DiscountTagWithoutImage(
+                                          discount: discount,
+                                          discountType: discountType,
+                                          freeDelivery: isRestaurant
+                                              ? restaurant!.freeDelivery
+                                              : false),
+                                ]),
+                        ]),
+                  ),
+                  Column(
+                      mainAxisAlignment: isRestaurant
+                          ? MainAxisAlignment.center
+                          : MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        fromCartSuggestion
+                            ? const SizedBox()
+                            : GetBuilder<WishListController>(
+                                builder: (wishController) {
+                                bool isWished = isRestaurant
+                                    ? wishController.wishRestIdList
+                                        .contains(restaurant!.id)
+                                    : wishController.wishProductIdList
+                                        .contains(product!.id);
+                                return InkWell(
+                                  onTap: () {
+                                    if (Get.find<AuthController>()
+                                        .isLoggedIn()) {
+                                      isWished
+                                          ? wishController.removeFromWishList(
+                                              isRestaurant
+                                                  ? restaurant!.id
+                                                  : product!.id,
+                                              isRestaurant)
+                                          : wishController.addToWishList(
+                                              product,
+                                              restaurant,
+                                              isRestaurant);
+                                    } else {
+                                      showCustomSnackBar(
+                                          'you_are_not_logged_in'.tr);
+                                    }
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: desktop
+                                            ? Dimensions.paddingSizeSmall
+                                            : 0),
+                                    child: Icon(
+                                      Icons.favorite,
+                                      size: desktop ? 30 : 25,
+                                      color: isWished
+                                          ? Theme.of(context).primaryColor
+                                          : Theme.of(context)
+                                              .primaryColor
+                                              .withOpacity(0.2),
+                                    ),
+                                  ),
+                                );
+                              }),
+                        !isRestaurant
+                            ? GetBuilder<CartController>(
+                                builder: (cartController) {
+                                int cartQty =
+                                    cartController.cartQuantity(product!.id!);
+                                int cartIndex = cartController.isExistInCart(
+                                    product!.id, null);
+                                CartModel cartModel = CartModel(
+                                  price,
+                                  discountPrice,
+                                  (price - discountPrice),
+                                  1,
+                                  [],
+                                  [],
+                                  false,
+                                  product,
+                                  [],
+                                );
+                                return cartQty != 0
+                                    ? Container(
+                                        decoration: BoxDecoration(
+                                          color: Theme.of(context).primaryColor,
+                                          borderRadius: BorderRadius.circular(
+                                              Dimensions.radiusExtraLarge),
+                                        ),
+                                        child: Row(children: [
+                                          InkWell(
+                                            onTap: () {
+                                              if (cartController
+                                                      .cartList[cartIndex]
+                                                      .quantity! >
+                                                  1) {
+                                                cartController.setQuantity(
+                                                    false, cartModel,
+                                                    cartIndex: cartIndex);
+                                              } else {
+                                                cartController
+                                                    .removeFromCart(cartIndex);
+                                              }
+                                            },
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    Theme.of(context).cardColor,
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                    color: Theme.of(context)
+                                                        .primaryColor),
+                                              ),
+                                              padding: const EdgeInsets.all(
+                                                  Dimensions
+                                                      .paddingSizeExtraSmall),
+                                              child: Icon(
+                                                Icons.remove,
+                                                size: 16,
+                                                color: Theme.of(context)
+                                                    .primaryColor,
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: Dimensions
+                                                    .paddingSizeSmall),
+                                            child: Text(
+                                              cartQty.toString(),
+                                              style: robotoMedium.copyWith(
+                                                  fontSize:
+                                                      Dimensions.fontSizeSmall,
+                                                  color: Theme.of(context)
+                                                      .cardColor),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              cartController.setQuantity(
+                                                  true, cartModel,
+                                                  cartIndex: cartIndex);
+                                            },
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    Theme.of(context).cardColor,
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                    color: Theme.of(context)
+                                                        .primaryColor),
+                                              ),
+                                              padding: const EdgeInsets.all(
+                                                  Dimensions
+                                                      .paddingSizeExtraSmall),
+                                              child: Icon(
+                                                Icons.add,
+                                                size: 16,
+                                                color: Theme.of(context)
+                                                    .primaryColor,
+                                              ),
+                                            ),
+                                          ),
+                                        ]),
+                                      )
+                                    : InkWell(
+                                        onTap: () {
+                                          if (product!.variations == null ||
+                                              (product!.variations != null &&
+                                                  product!
+                                                      .variations!.isEmpty)) {
+                                            Get.find<ProductController>()
+                                                .setExistInCart(product!);
+
+                                            if (Get.find<CartController>()
+                                                .existAnotherRestaurantProduct(
+                                                    cartModel.product!
+                                                        .restaurantId)) {
+                                              Get.dialog(
+                                                  ConfirmationDialog(
+                                                    icon: Images.warning,
+                                                    title:
+                                                        'are_you_sure_to_reset'
+                                                            .tr,
+                                                    description:
+                                                        'if_you_continue'.tr,
+                                                    onYesPressed: () {
+                                                      Get.back();
+                                                      Get.find<CartController>()
+                                                          .removeAllAndAddToCart(
+                                                              cartModel);
+                                                      _showCartSnackBar();
+                                                    },
+                                                  ),
+                                                  barrierDismissible: false);
+                                            } else {
+                                              Get.find<CartController>()
+                                                  .addToCart(
+                                                      cartModel,
+                                                      Get.find<
+                                                              ProductController>()
+                                                          .cartIndex);
+                                              _showCartSnackBar();
+                                            }
+                                          } else {
+                                            ResponsiveHelper.isMobile(context)
+                                                ? Get.bottomSheet(
+                                                    ProductBottomSheet(
+                                                        product: product,
+                                                        isCampaign: false),
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    isScrollControlled: true,
+                                                  )
+                                                : Get.dialog(
+                                                    Dialog(
+                                                        child:
+                                                            ProductBottomSheet(
+                                                                product:
+                                                                    product,
+                                                                isCampaign:
+                                                                    false)),
+                                                  );
+                                          }
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Theme.of(context).cardColor,
+                                            shape: BoxShape.circle,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: Colors.black
+                                                      .withOpacity(0.1),
+                                                  spreadRadius: 1,
+                                                  blurRadius: 10,
+                                                  offset: const Offset(2, 5))
+                                            ],
+                                          ),
+                                          child: Icon(Icons.add,
+                                              size: desktop ? 30 : 25,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                        ),
+                                      );
+                              })
+                            : const SizedBox(),
+                      ]),
+                ]),
+              )),
+            ],
+          ),
         ),
       ),
     );

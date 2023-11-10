@@ -53,107 +53,120 @@ class ProductView extends StatelessWidget {
       }
     }
 
-    return Column(children: [
-      !isNull
-          ? length > 0
-              ? GridView.builder(
-                  key: UniqueKey(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing: Dimensions.paddingSizeLarge,
-                    mainAxisSpacing:
-                        ResponsiveHelper.isDesktop(context) && !isWebRestaurant!
-                            ? Dimensions.paddingSizeLarge
-                            : isWebRestaurant!
-                                ? Dimensions.paddingSizeLarge
-                                : 0.01,
-                    childAspectRatio:
-                        ResponsiveHelper.isDesktop(context) && !isWebRestaurant!
-                            ? 3
-                            : isWebRestaurant!
-                                ? 1.5
-                                : showTheme1Restaurant
-                                    ? 1.9
-                                    : 3.3,
-                    crossAxisCount:
-                        ResponsiveHelper.isMobile(context) && !isWebRestaurant!
-                            ? 1
-                            : isWebRestaurant!
-                                ? 4
-                                : 3,
-                  ),
-                  physics: isScrollable
-                      ? const BouncingScrollPhysics()
-                      : const NeverScrollableScrollPhysics(),
-                  shrinkWrap: isScrollable ? false : true,
-                  itemCount: length,
-                  padding: padding,
-                  itemBuilder: (context, index) {
-                    return showTheme1Restaurant
-                        ? RestaurantWidget(
-                            restaurant: restaurants![index],
-                            index: index,
-                            inStore: inRestaurantPage)
-                        : isWebRestaurant!
-                            ? WebRestaurantWidget(
-                                restaurant: restaurants![index])
-                            : ProductWidget(
-                                isRestaurant: isRestaurant,
-                                product: isRestaurant ? null : products![index],
-                                restaurant:
-                                    isRestaurant ? restaurants![index] : null,
-                                index: index,
-                                length: length,
-                                isCampaign: isCampaign,
-                                inRestaurant: inRestaurantPage,
-                              );
-                  },
-                )
-              : NoDataScreen(
-                  isRestaurant: isRestaurant,
-                  title: noDataText ??
-                      (isRestaurant
-                          ? 'no_restaurant_available'.tr
-                          : 'no_food_available'.tr),
-                )
-          : GridView.builder(
-              key: UniqueKey(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisSpacing: Dimensions.paddingSizeLarge,
-                mainAxisSpacing: ResponsiveHelper.isDesktop(context)
-                    ? Dimensions.paddingSizeLarge
-                    : 0.01,
-                childAspectRatio:
-                    ResponsiveHelper.isDesktop(context) && !isWebRestaurant!
-                        ? 3
-                        : isWebRestaurant!
-                            ? 1.5
-                            : showTheme1Restaurant
-                                ? 1.9
-                                : 3.3,
-                crossAxisCount:
-                    ResponsiveHelper.isMobile(context) && !isWebRestaurant!
-                        ? 1
-                        : isWebRestaurant!
-                            ? 4
-                            : 3,
+    return Column(
+      children: [
+        !isNull
+            ? length > 0
+                ? GridView.builder(
+                    key: UniqueKey(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisSpacing: Dimensions.paddingSizeLarge,
+                      mainAxisExtent: MediaQuery.of(context).size.height * 0.3,
+                      mainAxisSpacing: ResponsiveHelper.isDesktop(context) &&
+                              !isWebRestaurant!
+                          ? Dimensions.paddingSizeLarge
+                          : isWebRestaurant!
+                              ? Dimensions.paddingSizeLarge
+                              : 0.01,
+                      childAspectRatio: ResponsiveHelper.isDesktop(context) &&
+                              !isWebRestaurant!
+                          ? 3
+                          : isWebRestaurant!
+                              ? 1.5
+                              : showTheme1Restaurant
+                                  ? 1.9
+                                  : 3.3,
+                      crossAxisCount: ResponsiveHelper.isMobile(context) &&
+                              !isWebRestaurant!
+                          ? 1
+                          : isWebRestaurant!
+                              ? 2
+                              : 2,
+                    ),
+                    physics: isScrollable
+                        ? const BouncingScrollPhysics()
+                        : const NeverScrollableScrollPhysics(),
+                    shrinkWrap: isScrollable ? false : true,
+                    itemCount: length,
+                    padding: padding,
+                    itemBuilder: (context, index) {
+                      return showTheme1Restaurant
+                          ? RestaurantWidget(
+                              restaurant: restaurants![index],
+                              index: index,
+                              inStore: inRestaurantPage)
+                          : isWebRestaurant!
+                              ? WebRestaurantWidget(
+                                  restaurant: restaurants![index])
+                              : SizedBox(
+                                  height:
+                                      !ResponsiveHelper.isDesktop(context) &&
+                                              !isWebRestaurant!
+                                          ? MediaQuery.of(context).size.height *
+                                              0.3
+                                          : null,
+                                  child: ProductWidget(
+                                    isRestaurant: isRestaurant,
+                                    product:
+                                        isRestaurant ? null : products![index],
+                                    restaurant: isRestaurant
+                                        ? restaurants![index]
+                                        : null,
+                                    index: index,
+                                    length: length,
+                                    isCampaign: isCampaign,
+                                    inRestaurant: inRestaurantPage,
+                                  ),
+                                );
+                    },
+                  )
+                : NoDataScreen(
+                    isRestaurant: isRestaurant,
+                    title: noDataText ??
+                        (isRestaurant
+                            ? 'no_restaurant_available'.tr
+                            : 'no_food_available'.tr),
+                  )
+            : GridView.builder(
+                key: UniqueKey(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisSpacing: Dimensions.paddingSizeLarge,
+                  mainAxisSpacing: ResponsiveHelper.isDesktop(context)
+                      ? Dimensions.paddingSizeLarge
+                      : 0.01,
+                  childAspectRatio:
+                      ResponsiveHelper.isDesktop(context) && !isWebRestaurant!
+                          ? 3
+                          : isWebRestaurant!
+                              ? 1.5
+                              : showTheme1Restaurant
+                                  ? 1.9
+                                  : 3.3,
+                  crossAxisCount:
+                      ResponsiveHelper.isMobile(context) && !isWebRestaurant!
+                          ? 1
+                          : isWebRestaurant!
+                              ? 4
+                              : 3,
+                ),
+                physics: isScrollable
+                    ? const BouncingScrollPhysics()
+                    : const NeverScrollableScrollPhysics(),
+                shrinkWrap: isScrollable ? false : true,
+                itemCount: shimmerLength,
+                padding: padding,
+                itemBuilder: (context, index) {
+                  return showTheme1Restaurant
+                      ? RestaurantShimmer(isEnable: isNull)
+                      : isWebRestaurant!
+                          ? const WebRestaurantShimmer()
+                          : ProductShimmer(
+                              isEnabled: isNull,
+                              isRestaurant: isRestaurant,
+                              hasDivider: index != shimmerLength - 1);
+                },
               ),
-              physics: isScrollable
-                  ? const BouncingScrollPhysics()
-                  : const NeverScrollableScrollPhysics(),
-              shrinkWrap: isScrollable ? false : true,
-              itemCount: shimmerLength,
-              padding: padding,
-              itemBuilder: (context, index) {
-                return showTheme1Restaurant
-                    ? RestaurantShimmer(isEnable: isNull)
-                    : isWebRestaurant!
-                        ? const WebRestaurantShimmer()
-                        : ProductShimmer(
-                            isEnabled: isNull,
-                            isRestaurant: isRestaurant,
-                            hasDivider: index != shimmerLength - 1);
-              },
-            ),
-    ]);
+      ],
+    );
   }
 }

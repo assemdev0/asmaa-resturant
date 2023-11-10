@@ -11,6 +11,7 @@ class AppConstants {
   static const String webHostedUrl = 'https://stackfood-web.6amtech.com';
 
   static const String baseUrl = 'https://stackfood-admin.6amtech.com';
+  static const String newBaseUrl = 'https://asma.live';
   static const String categoryUri = '/api/v1/categories';
   static const String bannerUri = '/api/v1/banners';
   static const String restaurantProductUri = '/api/v1/products/latest';
