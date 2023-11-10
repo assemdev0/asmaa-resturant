@@ -63,7 +63,7 @@ class RestaurantWidget extends StatelessWidget {
                       '${baseUrls.restaurantCoverPhotoUrl}/${restaurant!.coverPhoto}',
                   height: context.width * 0.3,
                   width: Dimensions.webMaxWidth,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fitWidth,
                 )),
             DiscountTag(
               discount:
