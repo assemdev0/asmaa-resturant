@@ -170,72 +170,75 @@ class _ProductBottomSheetState extends State<ProductBottomSheet> {
                                                               widget.product!));
                                                     }
                                                   },
-                                            child: Stack(children: [
-                                              CarouselSlider(
-                                                items: [
-                                                  widget.product!.image
-                                                  // images!.imagesUrl!
-                                                ]
-                                                    .map(
-                                                      (e) => InkWell(
-                                                        onTap: () {
-                                                          log(e!);
-                                                        },
-                                                        child: ClipRRect(
-                                                          borderRadius: BorderRadius
-                                                              .circular(Dimensions
-                                                                  .radiusSmall),
-                                                          child: CustomImage(
-                                                            // image: e.url!,
-                                                            image:
-                                                                '${widget.isCampaign ? Get.find<SplashController>().configModel!.baseUrls!.campaignImageUrl : Get.find<SplashController>().configModel!.baseUrls!.productImageUrl}/$e',
-                                                            // '${widget.product!.image}',
-                                                            width:
-                                                                double.infinity,
-                                                            // ResponsiveHelper
-                                                            //         .isMobile(context)
-                                                            //     ? 100
-                                                            //     : 140,
-                                                            height: ResponsiveHelper
-                                                                    .isMobile(
-                                                                        context)
-                                                                ? 220
-                                                                : 300,
-                                                            fit: BoxFit.cover,
+                                            child: Expanded(
+                                              child: Stack(children: [
+                                                CarouselSlider(
+                                                  items: [
+                                                    widget.product!.image
+                                                    // images!.imagesUrl!
+                                                  ]
+                                                      .map(
+                                                        (e) => InkWell(
+                                                          onTap: () {
+                                                            log(e!);
+                                                          },
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                    Dimensions
+                                                                        .radiusSmall),
+                                                            child: CustomImage(
+                                                              // image: e.url!,
+                                                              image:
+                                                                  '${widget.isCampaign ? Get.find<SplashController>().configModel!.baseUrls!.campaignImageUrl : Get.find<SplashController>().configModel!.baseUrls!.productImageUrl}/$e',
+                                                              // '${widget.product!.image}',
+                                                              width: double
+                                                                  .infinity,
+                                                              // ResponsiveHelper
+                                                              //         .isMobile(context)
+                                                              //     ? 100
+                                                              //     : 140,
+                                                              // height: ResponsiveHelper
+                                                              //         .isMobile(
+                                                              //             context)
+                                                              //     ? 220
+                                                              //     : 300,
+                                                              fit: BoxFit
+                                                                  .fitHeight,
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    )
-                                                    .toList(),
-                                                options: CarouselOptions(
-                                                  height:
-                                                      ResponsiveHelper.isMobile(
-                                                              context)
-                                                          ? 220
-                                                          : 300,
-                                                  viewportFraction: 1.0,
-                                                  autoPlay: true,
-                                                  autoPlayInterval:
-                                                      const Duration(
-                                                          seconds: 3),
-                                                  autoPlayAnimationDuration:
-                                                      const Duration(
-                                                          milliseconds: 800),
-                                                  autoPlayCurve:
-                                                      Curves.fastOutSlowIn,
-                                                  pauseAutoPlayOnTouch: true,
-                                                  aspectRatio: 1.0,
-                                                  initialPage: 0,
-                                                  enlargeCenterPage: true,
-                                                  onPageChanged:
-                                                      (index, reason) {},
+                                                      )
+                                                      .toList(),
+                                                  options: CarouselOptions(
+                                                    height: ResponsiveHelper
+                                                            .isMobile(context)
+                                                        ? 220
+                                                        : 300,
+                                                    viewportFraction: 1.0,
+                                                    autoPlay: true,
+                                                    autoPlayInterval:
+                                                        const Duration(
+                                                            seconds: 3),
+                                                    autoPlayAnimationDuration:
+                                                        const Duration(
+                                                            milliseconds: 800),
+                                                    autoPlayCurve:
+                                                        Curves.fastOutSlowIn,
+                                                    pauseAutoPlayOnTouch: true,
+                                                    aspectRatio: 1.0,
+                                                    initialPage: 0,
+                                                    enlargeCenterPage: true,
+                                                    onPageChanged:
+                                                        (index, reason) {},
+                                                  ),
                                                 ),
-                                              ),
-                                              DiscountTag(
-                                                  discount: discount,
-                                                  discountType: discountType,
-                                                  fromTop: 20),
-                                            ]),
+                                                DiscountTag(
+                                                    discount: discount,
+                                                    discountType: discountType,
+                                                    fromTop: 20),
+                                              ]),
+                                            ),
                                           )
                                         : const SizedBox.shrink(),
                                     const SizedBox(
