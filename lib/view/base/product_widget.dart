@@ -162,7 +162,7 @@ class ProductWidget extends StatelessWidget {
                                       ? 230
                                       : 205,
                               width: desktop ? 200 : 160,
-                              fit: BoxFit.fitHeight,
+                              fit: BoxFit.fitWidth,
                             ),
                           ),
                           DiscountTag(

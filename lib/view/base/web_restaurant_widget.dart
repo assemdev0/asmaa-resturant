@@ -58,7 +58,7 @@ class WebRestaurantWidget extends StatelessWidget {
                             '/${restaurant!.coverPhoto}',
                         height: 120,
                         width: 300,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fitWidth,
                       ),
                     ),
                     DiscountTag(
