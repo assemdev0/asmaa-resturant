@@ -66,8 +66,12 @@ class _FooterViewState extends State<FooterView> {
                               children: [
                                 const SizedBox(
                                     height: Dimensions.paddingSizeExtraLarge),
-                                Image.asset(Images.logo,
-                                    width: 126, height: 40),
+                                Image.asset(
+                                  Images.logo,
+                                  // width: 150,
+                                  height: 50,
+                                  fit: BoxFit.fitHeight,
+                                ),
                                 const SizedBox(
                                     height: Dimensions.paddingSizeSmall),
                                 Text(

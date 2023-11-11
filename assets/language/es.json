@@ -1,5 +1,5 @@
 {
-  "your_business_name": "apilar comida",
+  "your_business_name": "Ordera",
   "connection_to_api_server_failed": "La conexión al servidor API falló debido a la conexión a Internet",
   "select_language": "Seleccione el idioma",
   "save": "Salvar",
@@ -913,5 +913,5 @@
   "sorry_no_data_found_related_to_your_search": "Lo sentimos, no se encontraron datos relacionados con su búsqueda.",
   "no_promo_available": "No hay promoción disponible",
   "please_add_manually_or_collect_promo_from": "Agregue manualmente o recopile la promoción de",
-  "new_on_stackFood": "Nuevo en StackFood"
+  "new_on_stackFood": "Nuevo en Ordera"
 }

@@ -1,5 +1,5 @@
 {
-  "your_business_name": "كومة الغذاء",
+  "your_business_name": "Ordera",
   "connection_to_api_server_failed": "فشل الاتصال بخادم API بسبب الاتصال بالإنترنت",
   "select_language": "اختار اللغة",
   "save": "يحفظ",
@@ -928,5 +928,5 @@
   "sorry_no_data_found_related_to_your_search": "عذرًا، لم يتم العثور على بيانات ذات صلة ببحثك",
   "no_promo_available": "لا يوجد عرض ترويجي متاح",
   "please_add_manually_or_collect_promo_from": "الرجاء الإضافة يدويًا أو جمع العرض الترويجي من",
-  "new_on_stackFood": "جديد على كومة الغذاء"
+  "new_on_stackFood": "جديد على Ordera"
 }

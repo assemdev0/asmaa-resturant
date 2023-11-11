@@ -30,9 +30,7 @@ class WebMenuBar extends StatelessWidget implements PreferredSizeWidget {
               onTap: () => Get.toNamed(RouteHelper.getInitialRoute()),
               child: Image.asset(
                 Images.logo,
-                height: 150,
-                width: 150,
-                fit: BoxFit.fitWidth,
+                fit: BoxFit.fitHeight,
               ),
             ),
             Get.find<LocationController>().getUserAddress() != null
