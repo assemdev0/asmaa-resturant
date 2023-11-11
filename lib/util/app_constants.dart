@@ -3,7 +3,7 @@ import '/util/images.dart';
 import 'package:get/get.dart';
 
 class AppConstants {
-  static const String appName = 'StackFood';
+  static const String appName = 'Ordera';
   static const double appVersion = 7.1;
 
   static const String fontFamily = 'Roboto';
