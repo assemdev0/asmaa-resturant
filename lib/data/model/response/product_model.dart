@@ -141,7 +141,7 @@ class Product {
     ratingCount = json['rating_count'];
     veg = json['veg'] != null ? int.parse(json['veg'].toString()) : 0;
     quantityLimit = json['maximum_cart_quantity'];
-    // log('Images Urls: ${json['images_url']}');
+    log('Images Urls: ${json['images_url']}');
     if (json['images_url'] != null) {
       images = ImagesUrlModel.fromJson(json['images_url']);
     }
