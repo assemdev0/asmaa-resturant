@@ -141,7 +141,7 @@ class Product {
     ratingCount = json['rating_count'];
     veg = json['veg'] != null ? int.parse(json['veg'].toString()) : 0;
     quantityLimit = json['maximum_cart_quantity'];
-    log('Images Urls: ${json['images_url']}');
+    log('Images Urls: $json');
     if (json['images_url'] != null) {
       images = ImagesUrlModel.fromJson(json['images_url']);
     }
@@ -194,7 +194,7 @@ class ImagesUrlModel {
     if (json['images_url'] != null) {
       imagesUrl = <ImagesUrl>[];
       json['images_url'].forEach((v) {
-        imagesUrl!.add(new ImagesUrl.fromJson(v));
+        imagesUrl!.add(ImagesUrl.fromJson(v));
       });
     }
   }

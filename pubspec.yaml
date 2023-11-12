@@ -58,6 +58,21 @@ dependencies:
   animated_flip_counter: ^0.2.0
   meta_seo: ^3.0.5
   fluttertoast: ^8.2.2
+  rename: ^3.0.1
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: "ic_launcher"
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/image/logo.png"
+  min_sdk_android: 16 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/image/logo.png"
+    background_color: "#ffffff"
+    theme_color: "#ffffff"
+
 
 dependency_overrides:
   modal_bottom_sheet: ^3.0.0-pre
