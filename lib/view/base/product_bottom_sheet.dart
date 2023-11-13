@@ -157,7 +157,8 @@ class _ProductBottomSheetState extends State<ProductBottomSheet> {
                                     ///Product
 
                                     /// Image Slider
-                                    (widget.product!.image != null)
+                                    (widget.product!.image != null ||
+                                            widget.product!.images != null)
                                         // images!.imagesUrl!
                                         //         .isNotEmpty)
                                         ? InkWell(
@@ -173,7 +174,13 @@ class _ProductBottomSheetState extends State<ProductBottomSheet> {
                                             child: Stack(children: [
                                               CarouselSlider(
                                                 items: [
-                                                  widget.product!.image
+                                                  if (widget.product?.images ==
+                                                      null)
+                                                    widget.product!.image
+                                                  else
+                                                    ...widget.product!.images!
+                                                        .imagesUrl!
+                                                        .map((e) => e.url),
                                                   // images!.imagesUrl!
                                                 ]
                                                     .map(
