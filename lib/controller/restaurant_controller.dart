@@ -219,7 +219,7 @@ class RestaurantController extends GetxController implements GetxService {
     if (slug.isNotEmpty) {
       replace = '${routes[0]}?slug=$slug';
     } else {
-      replace = '${routes[0]}?slug=${_restaurant!.id}';
+      replace = '${routes[0]}?id=${_restaurant!.id}';
     }
     return replace;
   }

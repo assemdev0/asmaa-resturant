@@ -8,9 +8,10 @@ class AppConstants {
 
   static const String fontFamily = 'Roboto';
   static const bool payInWevView = false;
-  static const String webHostedUrl = 'https://ordera.org';
+  static const String webHostedUrl = 'https://ordera.org/order_now';
 
-  static const String baseUrl = 'https://admin.ordera.org';
+  static const String baseUrl = 'https://ordera.org';
+  // 'https://admin.ordera.org';
   // 'https://stackfood-admin.6amtech.com';
   // 'https://asma.live';
   // static const String newBaseUrl = 'https://asma.live';

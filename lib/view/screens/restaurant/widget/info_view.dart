@@ -164,15 +164,19 @@ class InfoView extends StatelessWidget {
                   if (isDesktop) {
                     String? hostname = html.window.location.hostname;
                     String protocol = html.window.location.protocol;
+                    // String port = html.window.location.port;
                     String shareUrl =
-                        '$protocol//$hostname${restController.filteringUrl(restaurant.slug ?? '')}';
+                        '$protocol//$hostname${restController.filteringUrl('')}';
+                    // '$hostname:$port${restController.filteringUrl('')}';
+                    // restaurant.slug ?? '')}';
 
                     Clipboard.setData(ClipboardData(text: shareUrl));
                     showCustomSnackBar('restaurant_url_copied'.tr,
                         isError: false);
                   } else {
                     String shareUrl =
-                        '${AppConstants.webHostedUrl}${restController.filteringUrl(restaurant.slug ?? '')}';
+                        '${AppConstants.webHostedUrl}${restController.filteringUrl('')}';
+                    // restaurant.slug ?? '')}';
                     Share.share(shareUrl);
                   }
                 },
