@@ -63,8 +63,8 @@ class AuthDialogState extends State<AuthDialog>
                     ),
                   ),
                   Image.asset(Images.logo, width: 60),
-                  const SizedBox(height: Dimensions.paddingSizeSmall),
-                  Image.asset(Images.logoName, width: 80),
+                  // const SizedBox(height: Dimensions.paddingSizeSmall),
+                  // Image.asset(Images.logoName, width: 80),
                   const SizedBox(height: Dimensions.paddingSizeExtraLarge),
                   Padding(
                     padding: const EdgeInsets.symmetric(

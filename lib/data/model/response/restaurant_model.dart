@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import '/data/model/response/cuisine_model.dart';
 import '/data/model/response/fund_bonus_body.dart';
@@ -130,6 +131,7 @@ class Restaurant {
   });
 
   Restaurant.fromJson(Map<String, dynamic> json) {
+    log('Restaurant Name: ${json['name']}');
     id = json['id'];
     name = json['name'];
     phone = json['phone'];

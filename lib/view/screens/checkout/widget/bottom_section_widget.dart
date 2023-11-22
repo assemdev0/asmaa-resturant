@@ -326,6 +326,7 @@ class BottomSectionWidget extends StatelessWidget {
         ]),
         const SizedBox(height: Dimensions.paddingSizeSmall),
         (orderController.orderType != 'take_away' &&
+                orderController.orderType == 'dinein' &&
                 Get.find<SplashController>().configModel!.dmTipsStatus == 1 &&
                 !orderController.subscriptionOrder)
             ? Row(
@@ -348,7 +349,8 @@ class BottomSectionWidget extends StatelessWidget {
                     !orderController.subscriptionOrder
                 ? Dimensions.paddingSizeSmall
                 : 0.0),
-        orderController.orderType != 'take_away'
+        orderController.orderType != 'take_away' &&
+                orderController.orderType != 'dinein'
             ? Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Text('delivery_fee'.tr, style: robotoRegular),
                 orderController.distance == -1

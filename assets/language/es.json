@@ -913,5 +913,8 @@
   "sorry_no_data_found_related_to_your_search": "Lo sentimos, no se encontraron datos relacionados con su búsqueda.",
   "no_promo_available": "No hay promoción disponible",
   "please_add_manually_or_collect_promo_from": "Agregue manualmente o recopile la promoción de",
-  "new_on_stackFood": "Nuevo en Ordera"
+  "new_on_stackFood": "Nuevo en Ordera",
+  "dine-in": "Comer en",
+  "table_number": "Número de mesa",
+  "please_enter_table_number": "Por favor ingrese el número de mesa"
 }

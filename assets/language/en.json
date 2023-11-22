@@ -914,5 +914,8 @@
   "subscribe": "Subscribe",
   "sorry_no_data_found_related_to_your_search": "Sorry no data found related to your search",
   "no_promo_available": "No promo available",
-  "please_add_manually_or_collect_promo_from": "Please add manually or collect promo from"
+  "please_add_manually_or_collect_promo_from": "Please add manually or collect promo from",
+  "dine-in": "Dine-in",
+  "table_number": "Table Number",
+  "please_enter_table_number": "Please enter table number"
 }

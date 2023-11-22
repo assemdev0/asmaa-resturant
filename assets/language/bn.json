@@ -925,5 +925,8 @@
   "sorry_no_data_found_related_to_your_search": "দুঃখিত আপনার সার্চ সম্পর্কিত কোন তথ্য পাওয়া যায়নি",
   "no_promo_available": "কোন প্রচার পাওয়া যায়নি",
   "please_add_manually_or_collect_promo_from": "ম্যানুয়ালি যোগ করুন অথবা সংগ্রহ করুন",
-  "new_on_stackFood": "স্ট্যাকফুডে নতুন"
+  "new_on_stackFood": "স্ট্যাকফুডে নতুন",
+  "dine-in": "ডাইন-ইন",
+  "table_number": "টেবিল নম্বর",
+  "please_enter_table_number": "দয়া করে টেবিল নম্বর লিখুন"
 }

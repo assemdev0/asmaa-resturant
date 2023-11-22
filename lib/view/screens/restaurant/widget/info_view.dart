@@ -166,7 +166,7 @@ class InfoView extends StatelessWidget {
                     String protocol = html.window.location.protocol;
                     // String port = html.window.location.port;
                     String shareUrl =
-                        '$protocol//$hostname${restController.filteringUrl('')}';
+                        '$protocol//$hostname/order_now${restController.filteringUrl(restaurant.slug ?? '')}';
                     // '$hostname:$port${restController.filteringUrl('')}';
                     // restaurant.slug ?? '')}';
 
@@ -175,7 +175,7 @@ class InfoView extends StatelessWidget {
                         isError: false);
                   } else {
                     String shareUrl =
-                        '${AppConstants.webHostedUrl}${restController.filteringUrl('')}';
+                        '${AppConstants.webHostedUrl}${restController.filteringUrl(restaurant.slug ?? '')}';
                     // restaurant.slug ?? '')}';
                     Share.share(shareUrl);
                   }

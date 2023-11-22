@@ -51,7 +51,7 @@ class _ProductBottomSheetState extends State<ProductBottomSheet> {
   @override
   void initState() {
     super.initState();
-    log('Product: ${widget.product!.images}');
+    log('${widget.product!.images!.toString()}');
     Get.find<ProductController>().initData(widget.product, widget.cart);
   }
 
@@ -175,28 +175,36 @@ class _ProductBottomSheetState extends State<ProductBottomSheet> {
                                               CarouselSlider(
                                                 items: [
                                                   if (widget.product?.images ==
-                                                      null)
+                                                          null ||
+                                                      widget.product?.images
+                                                              ?.isEmpty ==
+                                                          true)
                                                     widget.product!.image
                                                   else
                                                     ...widget.product!.images!
-                                                        .imagesUrl!
-                                                        .map((e) => e.url),
+                                                        .map((e) => e),
                                                   // images!.imagesUrl!
                                                 ]
                                                     .map(
                                                       (e) => InkWell(
                                                         onTap: () {
-                                                          log(e!);
+                                                          log(e!.toString());
                                                         },
                                                         child: ClipRRect(
                                                           borderRadius: BorderRadius
                                                               .circular(Dimensions
                                                                   .radiusSmall),
                                                           child: CustomImage(
-                                                            // image: e.url!,
-                                                            image:
-                                                                '${widget.isCampaign ? Get.find<SplashController>().configModel!.baseUrls!.campaignImageUrl : Get.find<SplashController>().configModel!.baseUrls!.productImageUrl}/$e',
-                                                            // '${widget.product!.image}',
+                                                            image: (widget.product
+                                                                            ?.images ==
+                                                                        null ||
+                                                                    widget
+                                                                            .product
+                                                                            ?.images
+                                                                            ?.isEmpty ==
+                                                                        true)
+                                                                ? '${widget.isCampaign ? Get.find<SplashController>().configModel!.baseUrls!.campaignImageUrl : Get.find<SplashController>().configModel!.baseUrls!.productImageUrl}/$e'
+                                                                : '$e',
                                                             width:
                                                                 double.infinity,
                                                             // ResponsiveHelper

@@ -44,7 +44,7 @@ class Product {
   String? name;
   String? description;
   String? image;
-  ImagesUrlModel? images;
+  List<String>? images;
   int? categoryId;
   List<CategoryIds>? categoryIds;
   List<Variation>? variations;
@@ -141,9 +141,15 @@ class Product {
     ratingCount = json['rating_count'];
     veg = json['veg'] != null ? int.parse(json['veg'].toString()) : 0;
     quantityLimit = json['maximum_cart_quantity'];
-    log('Images Urls: $json');
-    if (json['images_url'] != null) {
-      images = ImagesUrlModel.fromJson(json['images_url']);
+    log('Images Urls: ${json['images']}');
+    if (json['images'] != null) {
+      images = [];
+      json['images'].forEach((v) {
+        if (v['url'] != null) {
+          log('https://ordera.org/storage/app/public/${v['url']}');
+          images!.add('https://ordera.org/storage/app/public/${v['url']}');
+        }
+      });
     }
   }
 
@@ -182,31 +188,6 @@ class Product {
     data['veg'] = veg;
     data['maximum_cart_quantity'] = quantityLimit;
     return data;
-  }
-}
-
-class ImagesUrlModel {
-  List<ImagesUrl>? imagesUrl;
-
-  ImagesUrlModel({this.imagesUrl});
-
-  ImagesUrlModel.fromJson(Map<String, dynamic> json) {
-    if (json['images_url'] != null) {
-      imagesUrl = <ImagesUrl>[];
-      json['images_url'].forEach((v) {
-        imagesUrl!.add(ImagesUrl.fromJson(v));
-      });
-    }
-  }
-}
-
-class ImagesUrl {
-  String? url;
-
-  ImagesUrl({this.url});
-
-  ImagesUrl.fromJson(Map<String, dynamic> json) {
-    url = json['url'];
   }
 }
 

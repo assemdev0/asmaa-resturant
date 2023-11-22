@@ -156,8 +156,8 @@ class SplashScreenState extends State<SplashScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Image.asset(Images.logo, width: 150),
-                    const SizedBox(height: Dimensions.paddingSizeLarge),
-                    Image.asset(Images.logoName, width: 150),
+                    // const SizedBox(height: Dimensions.paddingSizeLarge),
+                    // Image.asset(Images.logoName, width: 150),
 
                     /*SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
             Text(AppConstants.APP_NAME, style: robotoMedium.copyWith(fontSize: 25)),*/

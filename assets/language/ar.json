@@ -928,5 +928,8 @@
   "sorry_no_data_found_related_to_your_search": "عذرًا، لم يتم العثور على بيانات ذات صلة ببحثك",
   "no_promo_available": "لا يوجد عرض ترويجي متاح",
   "please_add_manually_or_collect_promo_from": "الرجاء الإضافة يدويًا أو جمع العرض الترويجي من",
-  "new_on_stackFood": "جديد على Ordera"
+  "new_on_stackFood": "جديد على Ordera",
+  "dine-in": "تناول الطعام",
+  "table_number": "رقم الطاولة",
+  "please_enter_table_number": "الرجاء إدخال رقم الطاولة"
 }

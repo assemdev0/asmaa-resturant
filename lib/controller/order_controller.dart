@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import '/controller/auth_controller.dart';
 import '/controller/cart_controller.dart';
@@ -111,6 +112,7 @@ class OrderController extends GetxController implements GetxService {
   final TextEditingController streetNumberController = TextEditingController();
   final TextEditingController houseController = TextEditingController();
   final TextEditingController floorController = TextEditingController();
+  final TextEditingController tableNumberController = TextEditingController();
   final FocusNode streetNode = FocusNode();
   final FocusNode houseNode = FocusNode();
   final FocusNode floorNode = FocusNode();
@@ -887,6 +889,8 @@ class OrderController extends GetxController implements GetxService {
     update();
     Response response = await orderRepo.placeOrder(placeOrderBody);
     _isLoading = false;
+    log('Body: ${placeOrderBody.toJson()}');
+    log('Response: ${response.body}');
     if (response.statusCode == 200) {
       String? message = response.body['message'];
       String orderID = response.body['order_id'].toString();

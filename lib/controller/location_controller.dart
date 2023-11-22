@@ -33,6 +33,8 @@ class LocationController extends GetxController implements GetxService {
   LocationController({required this.locationRepo});
 
   Position _position = Position(
+      altitudeAccuracy: 0.0,
+      headingAccuracy: 0.0,
       longitude: 0,
       latitude: 0,
       timestamp: DateTime.now(),
@@ -42,14 +44,17 @@ class LocationController extends GetxController implements GetxService {
       speed: 1,
       speedAccuracy: 1);
   Position _pickPosition = Position(
-      longitude: 0,
-      latitude: 0,
-      timestamp: DateTime.now(),
-      accuracy: 1,
-      altitude: 1,
-      heading: 1,
-      speed: 1,
-      speedAccuracy: 1);
+    longitude: 0,
+    latitude: 0,
+    timestamp: DateTime.now(),
+    accuracy: 1,
+    altitude: 1,
+    heading: 1,
+    speed: 1,
+    speedAccuracy: 1,
+    altitudeAccuracy: 0.0,
+    headingAccuracy: 0.0,
+  );
   bool _loading = false;
   String? _address = '';
   String? _pickAddress = '';
@@ -119,6 +124,8 @@ class LocationController extends GetxController implements GetxService {
       myPosition = newLocalData;
     } catch (e) {
       myPosition = Position(
+        altitudeAccuracy: 0.0,
+        headingAccuracy: 0.0,
         latitude: defaultLatLng != null
             ? defaultLatLng.latitude
             : double.parse(Get.find<SplashController>()
@@ -178,6 +185,8 @@ class LocationController extends GetxController implements GetxService {
 
   Future<void> setStoreAddressToUserAddress(LatLng restaurantAddress) async {
     Position storePosition = Position(
+      altitudeAccuracy: 0.0,
+      headingAccuracy: 0.0,
       latitude: restaurantAddress.latitude,
       longitude: restaurantAddress.longitude,
       timestamp: DateTime.now(),
@@ -257,6 +266,8 @@ class LocationController extends GetxController implements GetxService {
       try {
         if (fromAddress) {
           _position = Position(
+            altitudeAccuracy: 0.0,
+            headingAccuracy: 0.0,
             latitude: position!.target.latitude,
             longitude: position.target.longitude,
             timestamp: DateTime.now(),
@@ -268,6 +279,8 @@ class LocationController extends GetxController implements GetxService {
           );
         } else {
           _pickPosition = Position(
+            altitudeAccuracy: 0.0,
+            headingAccuracy: 0.0,
             latitude: position!.target.latitude,
             longitude: position.target.longitude,
             timestamp: DateTime.now(),
@@ -522,6 +535,8 @@ class LocationController extends GetxController implements GetxService {
     }
 
     _pickPosition = Position(
+      altitudeAccuracy: 0.0,
+      headingAccuracy: 0.0,
       latitude: latLng.latitude,
       longitude: latLng.longitude,
       timestamp: DateTime.now(),
@@ -559,6 +574,8 @@ class LocationController extends GetxController implements GetxService {
 
   void setUpdateAddress(AddressModel address) {
     _position = Position(
+      altitudeAccuracy: 0.0,
+      headingAccuracy: 0.0,
       latitude: double.parse(address.latitude!),
       longitude: double.parse(address.longitude!),
       timestamp: DateTime.now(),

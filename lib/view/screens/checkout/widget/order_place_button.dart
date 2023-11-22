@@ -207,6 +207,9 @@ class OrderPlaceButton extends StatelessWidget {
                       total) {
                 showCustomSnackBar(
                     'you_do_not_have_sufficient_balance_in_wallet'.tr);
+              } else if (orderController.orderType == 'dinein' &&
+                  orderController.tableNumberController.text.isEmpty) {
+                showCustomSnackBar('please_enter_table_number'.tr);
               } else {
                 List<Cart> carts = [];
                 for (int index = 0; index < cartList.length; index++) {
@@ -273,83 +276,87 @@ class OrderPlaceButton extends StatelessWidget {
                     restController.address[orderController.addressIndex];
 
                 orderController.placeOrder(
-                    PlaceOrderBody(
-                      cart: carts,
-                      couponDiscountAmount:
-                          Get.find<CouponController>().discount,
-                      distance: orderController.distance,
-                      couponDiscountTitle:
-                          Get.find<CouponController>().discount! > 0
-                              ? Get.find<CouponController>().coupon!.title
-                              : null,
-                      scheduleAt: !restController.restaurant!.scheduleOrder!
-                          ? null
-                          : (orderController.selectedDateSlot == 0 &&
-                                  orderController.selectedTimeSlot == 0)
-                              ? null
-                              : DateConverter.dateToDateAndTime(
-                                  scheduleStartDate),
-                      orderAmount: total,
-                      orderNote: orderController.noteController.text,
-                      orderType: orderController.orderType,
-                      paymentMethod: orderController.paymentMethodIndex == 0
-                          ? 'cash_on_delivery'
-                          : orderController.paymentMethodIndex == 1
-                              ? 'wallet'
-                              : 'digital_payment',
-                      couponCode: (Get.find<CouponController>().discount! > 0 ||
-                              (Get.find<CouponController>().coupon != null &&
-                                  Get.find<CouponController>().freeDelivery))
-                          ? Get.find<CouponController>().coupon!.code
-                          : null,
-                      restaurantId: cartList[0].product!.restaurantId,
-                      address: finalAddress.address,
-                      latitude: finalAddress.latitude,
-                      longitude: finalAddress.longitude,
-                      addressType: finalAddress.addressType,
-                      contactPersonName: finalAddress.contactPersonName ??
-                          '${Get.find<UserController>().userInfoModel!.fName} '
-                              '${Get.find<UserController>().userInfoModel!.lName}',
-                      contactPersonNumber: finalAddress.contactPersonNumber ??
-                          Get.find<UserController>().userInfoModel!.phone,
-                      discountAmount: discount,
-                      taxAmount: tax,
-                      road: orderController.streetNumberController.text.trim(),
-                      cutlery: Get.find<CartController>().addCutlery ? 1 : 0,
-                      house: orderController.houseController.text.trim(),
-                      floor: orderController.floorController.text.trim(),
-                      dmTips: (orderController.orderType == 'take_away' ||
-                              orderController.subscriptionOrder ||
-                              orderController.selectedTips == 0)
-                          ? ''
-                          : orderController.tips.toString(),
-                      subscriptionOrder:
-                          orderController.subscriptionOrder ? '1' : '0',
-                      subscriptionType: orderController.subscriptionType,
-                      subscriptionQuantity: subscriptionQty.toString(),
-                      subscriptionDays: days,
-                      subscriptionStartAt: orderController.subscriptionOrder
-                          ? DateConverter.dateToDateAndTime(
-                              orderController.subscriptionRange!.start)
-                          : '',
-                      subscriptionEndAt: orderController.subscriptionOrder
-                          ? DateConverter.dateToDateAndTime(
-                              orderController.subscriptionRange!.end)
-                          : '',
-                      unavailableItemNote:
-                          Get.find<CartController>().notAvailableIndex != -1
-                              ? Get.find<CartController>().notAvailableList[
-                                  Get.find<CartController>().notAvailableIndex]
-                              : '',
-                      deliveryInstruction:
-                          orderController.selectedInstruction != -1
-                              ? AppConstants.deliveryInstructionList[
-                                  orderController.selectedInstruction]
-                              : '',
-                      partialPayment: orderController.isPartialPay ? 1 : 0,
-                    ),
-                    _callback,
-                    total);
+                  PlaceOrderBody(
+                    dinein: orderController.orderType == 'dinein' ? 1 : 0,
+                    tableNum: orderController.orderType == 'dinein'
+                        ? int.parse(orderController.tableNumberController.text)
+                        : null,
+                    cart: carts,
+                    couponDiscountAmount: Get.find<CouponController>().discount,
+                    distance: orderController.distance,
+                    couponDiscountTitle:
+                        Get.find<CouponController>().discount! > 0
+                            ? Get.find<CouponController>().coupon!.title
+                            : null,
+                    scheduleAt: !restController.restaurant!.scheduleOrder!
+                        ? null
+                        : (orderController.selectedDateSlot == 0 &&
+                                orderController.selectedTimeSlot == 0)
+                            ? null
+                            : DateConverter.dateToDateAndTime(
+                                scheduleStartDate),
+                    orderAmount: total,
+                    orderNote: orderController.noteController.text,
+                    orderType: orderController.orderType,
+                    paymentMethod: orderController.paymentMethodIndex == 0
+                        ? 'cash_on_delivery'
+                        : orderController.paymentMethodIndex == 1
+                            ? 'wallet'
+                            : 'digital_payment',
+                    couponCode: (Get.find<CouponController>().discount! > 0 ||
+                            (Get.find<CouponController>().coupon != null &&
+                                Get.find<CouponController>().freeDelivery))
+                        ? Get.find<CouponController>().coupon!.code
+                        : null,
+                    restaurantId: cartList[0].product!.restaurantId,
+                    address: finalAddress.address,
+                    latitude: finalAddress.latitude,
+                    longitude: finalAddress.longitude,
+                    addressType: finalAddress.addressType,
+                    contactPersonName: finalAddress.contactPersonName ??
+                        '${Get.find<UserController>().userInfoModel!.fName} '
+                            '${Get.find<UserController>().userInfoModel!.lName}',
+                    contactPersonNumber: finalAddress.contactPersonNumber ??
+                        Get.find<UserController>().userInfoModel!.phone,
+                    discountAmount: discount,
+                    taxAmount: tax,
+                    road: orderController.streetNumberController.text.trim(),
+                    cutlery: Get.find<CartController>().addCutlery ? 1 : 0,
+                    house: orderController.houseController.text.trim(),
+                    floor: orderController.floorController.text.trim(),
+                    dmTips: (orderController.orderType == 'take_away' ||
+                            orderController.subscriptionOrder ||
+                            orderController.selectedTips == 0)
+                        ? ''
+                        : orderController.tips.toString(),
+                    subscriptionOrder:
+                        orderController.subscriptionOrder ? '1' : '0',
+                    subscriptionType: orderController.subscriptionType,
+                    subscriptionQuantity: subscriptionQty.toString(),
+                    subscriptionDays: days,
+                    subscriptionStartAt: orderController.subscriptionOrder
+                        ? DateConverter.dateToDateAndTime(
+                            orderController.subscriptionRange!.start)
+                        : '',
+                    subscriptionEndAt: orderController.subscriptionOrder
+                        ? DateConverter.dateToDateAndTime(
+                            orderController.subscriptionRange!.end)
+                        : '',
+                    unavailableItemNote:
+                        Get.find<CartController>().notAvailableIndex != -1
+                            ? Get.find<CartController>().notAvailableList[
+                                Get.find<CartController>().notAvailableIndex]
+                            : '',
+                    deliveryInstruction:
+                        orderController.selectedInstruction != -1
+                            ? AppConstants.deliveryInstructionList[
+                                orderController.selectedInstruction]
+                            : '',
+                    partialPayment: orderController.isPartialPay ? 1 : 0,
+                  ),
+                  _callback,
+                  total,
+                );
               }
             }),
       ),

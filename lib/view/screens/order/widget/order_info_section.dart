@@ -107,25 +107,27 @@ class OrderInfoSection extends StatelessWidget {
                       Center(
                         child: Row(mainAxisSize: MainAxisSize.min, children: [
                           Text(
-                            DateConverter.differenceInMinute(
-                                        order.restaurant!.deliveryTime,
-                                        order.createdAt,
-                                        order.processingTime,
-                                        order.scheduleAt) <
-                                    5
-                                ? '1 - 5'
-                                : '${DateConverter.differenceInMinute(order.restaurant!.deliveryTime, order.createdAt, order.processingTime, order.scheduleAt) - 5} '
-                                    '- ${DateConverter.differenceInMinute(order.restaurant!.deliveryTime, order.createdAt, order.processingTime, order.scheduleAt)}',
+                            // DateConverter.differenceInMinute(
+                            //             order.restaurant!.deliveryTime,
+                            //             order.createdAt,
+                            //             order.processingTime,
+                            //             order.scheduleAt) <
+                            //         5
+                            //     ? '1 - 5'
+                            //     :
+                            order.restaurant!.deliveryTime ?? '',
+                            // '${DateConverter.differenceInMinute(order.restaurant!.deliveryTime, order.createdAt, order.processingTime, order.scheduleAt) - 5} '
+                            // '- ${DateConverter.differenceInMinute(order.restaurant!.deliveryTime, order.createdAt, order.processingTime, order.scheduleAt)}',
                             style: robotoBold.copyWith(
                                 fontSize: Dimensions.fontSizeExtraLarge),
                             textDirection: TextDirection.ltr,
                           ),
-                          const SizedBox(
+/*                          const SizedBox(
                               width: Dimensions.paddingSizeExtraSmall),
                           Text('min'.tr,
                               style: robotoMedium.copyWith(
                                   fontSize: Dimensions.fontSizeLarge,
-                                  color: Theme.of(context).primaryColor)),
+                                  color: Theme.of(context).primaryColor)),*/
                         ]),
                       ),
                       const SizedBox(height: Dimensions.paddingSizeExtraLarge),

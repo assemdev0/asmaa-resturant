@@ -158,6 +158,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
                   return GetBuilder<OrderController>(
                       builder: (orderController) {
                     bool showTips = orderController.orderType != 'take_away' &&
+                        orderController.orderType == 'dinein' &&
                         Get.find<SplashController>()
                                 .configModel!
                                 .dmTipsStatus ==
@@ -282,6 +283,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
 
                       if (orderController.orderType == 'take_away' ||
                           restController.restaurant!.freeDelivery! ||
+                          orderController.orderType == 'dinein' ||
                           (Get.find<SplashController>()
                                       .configModel!
                                       .freeDeliveryOver !=

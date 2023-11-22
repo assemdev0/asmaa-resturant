@@ -69,11 +69,11 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                                       Center(
                                           child: Image.asset(Images.logo,
                                               width: 100)),
-                                      const SizedBox(
-                                          height: Dimensions.paddingSizeSmall),
-                                      Center(
-                                          child: Image.asset(Images.logoName,
-                                              width: 100)),
+                                      // const SizedBox(
+                                      //     height: Dimensions.paddingSizeSmall),
+                                      // Center(
+                                      //     child: Image.asset(Images.logoName,
+                                      //         width: 100)),
                                     ])
                                   : const SizedBox(),
 

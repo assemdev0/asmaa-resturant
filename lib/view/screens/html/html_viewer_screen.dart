@@ -118,22 +118,23 @@ class _HtmlViewerScreenState extends State<HtmlViewerScreen> {
                                                 LaunchMode.externalApplication);
                                       },
                                     )
-                                  : SelectableHtml(
-                                      data: splashController.htmlText,
-                                      shrinkWrap: true,
-                                      onLinkTap: (String? url,
-                                          RenderContext context,
-                                          Map<String, String> attributes,
-                                          element) {
-                                        if (url!.startsWith('www.')) {
-                                          url = 'https://$url';
-                                        }
-                                        if (kDebugMode) {
-                                          print('Redirect to url: $url');
-                                        }
-                                        html.window.open(url, "_blank");
-                                      },
-                                    ),
+                                  : Container(),
+                              // SelectableHtml(
+                              //         data: splashController.htmlText,
+                              //         shrinkWrap: true,
+                              //         onLinkTap: (String? url,
+                              //             RenderContext context,
+                              //             Map<String, String> attributes,
+                              //             element) {
+                              //           if (url!.startsWith('www.')) {
+                              //             url = 'https://$url';
+                              //           }
+                              //           if (kDebugMode) {
+                              //             print('Redirect to url: $url');
+                              //           }
+                              //           html.window.open(url, "_blank");
+                              //         },
+                              //       ),
                             ]),
                       ),
                     ),

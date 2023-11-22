@@ -36,6 +36,8 @@ class PlaceOrderBody {
   String? _unavailableItemNote;
   String? _deliveryInstruction;
   int? _partialPayment;
+  int? _tableNum;
+  int? _dinein;
 
   PlaceOrderBody({
     required List<Cart> cart,
@@ -71,6 +73,8 @@ class PlaceOrderBody {
     required String unavailableItemNote,
     required String deliveryInstruction,
     required int partialPayment,
+    required int? tableNum,
+    required int dinein,
   }) {
     _cart = cart;
     _couponDiscountAmount = couponDiscountAmount;
@@ -105,6 +109,8 @@ class PlaceOrderBody {
     _unavailableItemNote = unavailableItemNote;
     _deliveryInstruction = deliveryInstruction;
     _partialPayment = partialPayment;
+    _tableNum = tableNum;
+    _dinein = dinein;
   }
 
   List<Cart>? get cart => _cart;
@@ -139,6 +145,8 @@ class PlaceOrderBody {
   String? get unavailableItemNote => _unavailableItemNote;
   String? get deliveryInstruction => _deliveryInstruction;
   int? get partialPayment => _partialPayment;
+  int? get tableNum => _tableNum;
+  int? get dinein => _dinein;
 
   PlaceOrderBody.fromJson(Map<String, dynamic> json) {
     if (json['cart'] != null) {
@@ -184,6 +192,8 @@ class PlaceOrderBody {
     _unavailableItemNote = json['unavailable_item_note'];
     _deliveryInstruction = json['delivery_instruction'];
     _partialPayment = json['partial_payment'];
+    _tableNum = json['table_num'];
+    _dinein = json['dinein'];
   }
 
   Map<String, dynamic> toJson() {
@@ -228,6 +238,8 @@ class PlaceOrderBody {
       data['cutlery'] = _cutlery.toString();
     }
     data['partial_payment'] = _partialPayment.toString();
+    if (_tableNum != null) data['table_num'] = _tableNum;
+    data['dinein'] = _dinein;
     return data;
   }
 }
